@@ -2,7 +2,6 @@
 *(Copilot Studio + SharePoint + Azure OpenAI)*
 
 Enterprise-grade AI agent built using **Microsoft Copilot Studio** to analyze **public ESG-related contracts** stored in **SharePoint Online**.
-
 ---
 
 ## What the Agent Does
@@ -18,7 +17,6 @@ It produces **structured, audit-ready summaries** suitable for:
 - management
 - compliance teams
 - internal review
-
 ---
 
 ## Key Characteristics
@@ -31,7 +29,6 @@ It produces **structured, audit-ready summaries** suitable for:
 - **No personal data processing**
 
 ---
-
 ## Why This Project Exists
 
 Organizations face increasing pressure to comply with:
@@ -47,29 +44,9 @@ Manual contract reviews are:
 This project demonstrates how **Copilot Studio orchestrates Azure OpenAI safely** within enterprise governance boundaries.
 
 ---
-
 ## Architecture Overview
 
 This solution intentionally separates **AI reasoning** from **enterprise data access**.
-
-```mermaid
-flowchart TB
-  subgraph Enterprise["Enterprise Boundary (Microsoft 365)"]
-    CS[Copilot Studio Agent]
-    SP[SharePoint Online]
-    G[Microsoft Graph]
-    AUD[Audit trail / M365 governance]
-    CS --> G --> SP
-    CS --> AUD
-  end
-
-  subgraph AI["AI Reasoning Boundary (Azure)"]
-    AO[Azure OpenAI\nReasoning only]
-  end
-
-  CS -->|Retrieved context only| AO
-  AO -->|Structured output| CS
-  AO -.->|No SharePoint connectivity| SP
 
 ### High-level flow
 User
@@ -77,7 +54,6 @@ User
 → Microsoft Graph (SharePoint Knowledge)
 → Azure OpenAI (Reasoning Only)
 → Structured ESG Compliance Output
-
 
 ### Key Architecture Principles
 
