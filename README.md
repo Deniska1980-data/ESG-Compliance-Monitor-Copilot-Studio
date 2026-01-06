@@ -1,147 +1,150 @@
-ESG Compliance Monitor – Contract Analysis Agent
+# ESG Compliance Monitor – Contract Analysis Agent  
+*(Copilot Studio + SharePoint + Azure OpenAI)*
 
-(Copilot Studio + SharePoint + Azure OpenAI)
+Enterprise-grade AI agent built using **Microsoft Copilot Studio** to analyze **public ESG-related contracts** stored in **SharePoint Online**.
 
-Enterprise-grade AI agent built using Microsoft Copilot Studio to analyze public ESG-related contracts stored in SharePoint Online.
+---
+
+## What the Agent Does
 
 The agent identifies:
 
-ESG obligations
+- **ESG obligations**
+- **Compliance requirements**
+- **Regulatory and contractual risks**
+- **Financial and reporting impacts**
 
-Compliance requirements
+It produces **structured, audit-ready summaries** suitable for:
+- management
+- compliance teams
+- internal review
 
-Regulatory and contractual risks
+---
 
-Financial and reporting impacts
+## Key Characteristics
 
-It produces structured, audit-ready summaries suitable for management, compliance teams, and internal review.
-Key Characteristics
+- SharePoint-native knowledge access via **Microsoft 365 permissions**
+- **Azure OpenAI used strictly for reasoning**
+- Clear separation between enterprise data access and AI processing
+- Audit-friendly outputs with explicit source references
+- **No legal advice**
+- **No personal data processing**
 
-SharePoint-native knowledge access via Microsoft 365 permissions
+---
 
-Azure OpenAI used strictly for reasoning
+## Why This Project Exists
 
-Clear separation between enterprise data access and AI processing
-
-Audit-friendly outputs with explicit source references
-
-No legal advice
-
-No personal data processing
-
-Why This Project Exists
-
-Organizations face increasing pressure to comply with CSRD / ESRS, ESG reporting obligations, and public procurement transparency.
+Organizations face increasing pressure to comply with:
+- **CSRD / ESRS**
+- ESG reporting obligations
+- Public procurement transparency
 
 Manual contract reviews are:
+- slow
+- error-prone
+- difficult to audit
 
-Slow
+This project demonstrates how **Copilot Studio orchestrates Azure OpenAI safely** within enterprise governance boundaries.
 
-Error-prone
+---
 
-Difficult to audit
+## Architecture Overview
 
-This project demonstrates how Copilot Studio can orchestrate Azure OpenAI safely within enterprise governance boundaries.
+This solution intentionally separates **AI reasoning** from **enterprise data access**.
 
-Architecture Overview
+### High-level flow
+User
+→ Copilot Studio Agent
+→ Microsoft Graph (SharePoint Knowledge)
+→ Azure OpenAI (Reasoning Only)
+→ Structured ESG Compliance Output
 
-This solution intentionally separates AI reasoning from enterprise data access.
 
-High-level flow:
-User  
- → Copilot Studio Agent  
-   → Microsoft Graph (SharePoint Knowledge)  
-     → Azure OpenAI (Reasoning Only)  
-       → Structured ESG Compliance Output
+### Key Architecture Principles
 
-Key Architecture Principles
+- **Least privilege**  
+  The agent reads only the selected SharePoint library or folder.
 
-Least privilege
-The agent reads only the selected SharePoint library or folder.
+- **Governance first**  
+  Metadata-based classification and strict scope limitation.
 
-Governance first
-Metadata-based classification and strict scope limitation.
+- **Auditability**  
+  Every output references the source document.
 
-Auditability
-Every output references the source document.
+- **Security by design**  
+  Azure OpenAI never directly connects to SharePoint.
 
-Security by design
-Azure OpenAI never directly connects to SharePoint.
+---
 
-SharePoint Structure
+## SharePoint Structure
 
-SharePoint Site: ESGComplianceHub
-Document Library: Documents
+**SharePoint Site:** `ESGComplianceHub`  
+**Document Library:** `Documents`
 
 Documents/
 ├─ 01_Legislation
 ├─ 02_ESG_Policies
 ├─ 03_Contracts
-│   ├─ ESG_Public_Contract_Source.docx
-│   ├─ ESG_Public_Contract_Source.pdf
+│ ├─ ESG_Public_Contract_Source.docx
+│ ├─ ESG_Public_Contract_Source.pdf
 ├─ 04_Reports
-├─ 05_AI_Outputs
+├─ 05_AI_Output
 
-Only documents stored in 03_Contracts are used for contract analysis.
 
-Knowledge Connection Model
-| Component               | Access                          |
-| ----------------------- | ------------------------------- |
-| Copilot Studio          | Microsoft 365 permissions       |
-| SharePoint              | Native Graph-based access       |
-| Azure OpenAI            | Receives retrieved context only |
-| Standalone Azure OpenAI | ❌ No SharePoint access         |
+Only documents stored in **03_Contracts** are used for contract analysis.
 
-Important:
-Standalone Azure OpenAI cannot see SharePoint.
-This is intentional and correct.
+---
 
-Agent Responsibilities
+## Knowledge Connection Model
 
-The agent performs analytical review only:
+| Component | Access |
+|---------|--------|
+| Copilot Studio | Microsoft 365 permissions |
+| SharePoint | Native Graph-based access |
+| Azure OpenAI | Receives retrieved context only |
+| Standalone Azure OpenAI | ❌ No SharePoint access |
 
-Identify ESG obligations
+**Important:**  
+Standalone Azure OpenAI **cannot see SharePoint**.  
+This is **intentional and correct**.
 
-Identify compliance requirements
+---
 
-Detect missing targets, timelines, KPIs
+## Agent Responsibilities
 
-Highlight compliance risks
+The agent performs **analytical review only**:
 
-Assess potential financial or reporting impacts
+- Identify ESG obligations
+- Identify compliance requirements
+- Detect missing targets, timelines, KPIs
+- Highlight compliance risks
+- Assess potential financial or reporting impacts
 
-The agent does not:
+### The agent does NOT:
+- Provide legal advice
+- Process personal data
+- Make binding compliance decisions
 
-Provide legal advice
+---
 
-Process personal data
+## Example Outputs
 
-Make binding compliance decisions
+### ESG Obligations Summary
+- CSRD / ESRS alignment requirements
+- ESG reporting scope definition
+- Sustainability KPI responsibilities
 
-Example Outputs
-ESG Obligations Summary
+### Compliance Risks
+- Incomplete ESG reporting
+- Missed regulatory deadlines
+- Weak enforcement mechanisms
 
-CSRD / ESRS alignment requirements
+### Financial Impact
+- Contractual penalties
+- Daily delay penalties
+- Reputational risk exposure
 
-ESG reporting scope definition
-
-Sustainability KPI responsibilities
-
-Compliance Risks
-
-Incomplete ESG reporting
-
-Missed regulatory deadlines
-
-Weak enforcement mechanisms
-
-Financial Impact
-
-Contractual penalties
-
-Daily delay penalties
-
-Reputational risk exposure
+---
 
 # Screenshots – Copilot Studio vs Azure OpenAI
 
@@ -171,7 +174,6 @@ It never connects directly to SharePoint.
 
 ![Azure OpenAI Agent](screenshots/screenshot_Azure_OpenAI_Agent_answearJPG.JPG)
 
----
 
 ## Key Observations
 
@@ -181,39 +183,37 @@ It never connects directly to SharePoint.
 
 ---
 
-## Architectural note
+## Architectural Note
 
 These screenshots demonstrate that:
 - Copilot Studio can directly access SharePoint via Microsoft 365 permissions
 - Azure OpenAI **cannot** access SharePoint directly
 - Azure OpenAI processes only the context provided by Copilot Studio or manual upload
 
+---
 
-Azure OpenAI – Standalone Agent (No SharePoint Access)
+## What This Repository Demonstrates
 
-What This Repository Demonstrates
+- Correct enterprise use of Azure OpenAI
+- Secure Copilot Studio orchestration
+- SharePoint-based knowledge grounding
+- ESG-focused contract analysis
+- Audit-ready AI outputs
 
-Correct enterprise use of Azure OpenAI
+---
 
-Secure Copilot Studio orchestration
+## Disclaimer
 
-SharePoint-based knowledge grounding
+This project is for **educational and portfolio purposes only**.
 
-ESG-focused contract analysis
+- No legal advice
+- No personal data
+- Uses publicly available or mock ESG contract content
 
-Audit-ready AI outputs
+---
 
-Disclaimer
+## Author
 
-This project is for educational and portfolio purposes only.
-
-No legal advice
-
-No personal data
-
-Uses publicly available or mock ESG contract content
-
-Author
-
-Denisa Pitnerová
+**Denisa Pitnerová**  
 AI Agents · DevOps · Microsoft 365 · Azure · ESG Automation
+
