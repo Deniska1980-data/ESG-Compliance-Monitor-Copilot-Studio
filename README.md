@@ -48,6 +48,26 @@ This project demonstrates how **Copilot Studio orchestrates Azure OpenAI safely*
 
 This solution intentionally separates **AI reasoning** from **enterprise data access**.
 
+```mermaid
+flowchart TB
+  subgraph Enterprise["Enterprise Boundary (Microsoft 365)"]
+    CS[Copilot Studio Agent]
+    SP[SharePoint Online]
+    G[Microsoft Graph]
+    AUD[Audit trail / M365 governance]
+    CS --> G --> SP
+    CS --> AUD
+  end
+
+  subgraph AI["AI Reasoning Boundary (Azure)"]
+    AO[Azure OpenAI\nReasoning only]
+  end
+
+  CS -->|Retrieved context only| AO
+  AO -->|Structured output| CS
+  AO -.->|No SharePoint connectivity| SP
+
+
 ### High-level flow
 User
 → Copilot Studio Agent
@@ -202,7 +222,6 @@ These screenshots demonstrate that:
 - Audit-ready AI outputs
 
 ---
-
 ## Disclaimer
 
 This project is for **educational and portfolio purposes only**.
@@ -210,29 +229,6 @@ This project is for **educational and portfolio purposes only**.
 - No legal advice
 - No personal data
 - Uses publicly available or mock ESG contract content
-
-
-```mermaid
-flowchart TB
-  subgraph Enterprise["Enterprise Boundary (Microsoft 365)"]
-    CS[Copilot Studio Agent]
-    SP[SharePoint Online]
-    G[Microsoft Graph]
-    AUD[Audit trail / M365 governance]
-    CS --> G --> SP
-    CS --> AUD
-  end
-
-  subgraph AI["AI Reasoning Boundary (Azure)"]
-    AO[Azure OpenAI\nReasoning only]
-  end
-
-  CS -->|Retrieved context only| AO
-  AO -->|Structured output| CS
-  AO -.->|No SharePoint connectivity| SP
-
-
-
 ---
 
 ## Author
