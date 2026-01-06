@@ -52,6 +52,7 @@ This project demonstrates how **Copilot Studio orchestrates Azure OpenAI safely*
 
 This solution intentionally separates **AI reasoning** from **enterprise data access**.
 
+```mermaid
 flowchart TB
   subgraph Enterprise["Enterprise Boundary (Microsoft 365)"]
     CS[Copilot Studio Agent]
@@ -69,7 +70,6 @@ flowchart TB
   CS -->|Retrieved context only| AO
   AO -->|Structured output| CS
   AO -.->|No SharePoint connectivity| SP
-
 
 ### High-level flow
 User
