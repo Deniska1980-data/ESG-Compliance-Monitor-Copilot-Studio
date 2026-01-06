@@ -147,8 +147,11 @@ Reputational risk exposure
 
 This folder documents the practical behavior of the ESG Compliance Monitor across Microsoft Copilot Studio, SharePoint, and standalone Azure OpenAI.
 
----
-### Copilot Studio – Agent question and answer
+## Copilot Studio – Example Question and Answer
+
+**Copilot Studio agent analyzing ESG contract stored in SharePoint**
+
+![Copilot Studio – Question](screenshots/screenshot_Copilot_studio_question AI_Agent.JPG)
 
 ![Copilot Studio – Agent Answer](screenshots/screenshot_Copilot_studio_AI_Agent_answear.JPG)
 
